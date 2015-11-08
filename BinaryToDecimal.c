@@ -12,14 +12,22 @@ int convert(int b, int c, int t);
 */
 int main()
 {
-	int binary;
-	int decimal;
+	unsigned int binary;
+	unsigned int decimal;
 	
 	printf("Enter a binary number: ");
 	scanf("%d",&binary);
 
 	decimal = convert(binary, 1, 0);
-	printf("Decimal value of %d is %d:",binary,decimal);
+
+	if(binary > 1111111111){
+		printf("Entered value is too large to be processed\n",binary);
+	} else if(binary > 11111) {
+		printf("Entered value of %d is outside requirements of assignment\n",binary);
+		printf("However, decimal value of %d is %d\n",binary,decimal);
+	} else {
+		printf("Decimal value of %d is %d:",binary,decimal);
+	}
 }
 
 /*	convert function:
@@ -31,7 +39,7 @@ int main()
 int convert(int b, int c, int t)
 {
 	if(b>0){
-		t+=b%10;
+		t+=(b%10)*c;
 		convert(b/10,c*2,t);
 	} else {
 		return t;
